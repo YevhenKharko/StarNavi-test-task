@@ -1,0 +1,9 @@
+.select {
+  flex-basis: 30%;
+  height: 30px;
+  text-align: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

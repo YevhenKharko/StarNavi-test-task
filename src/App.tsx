@@ -1,35 +1,53 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+import { Loader } from './components/Loader';
+import { Field } from './components/Field';
+import { Select } from './components/Select';
+import { StartButton } from './components/StartButton';
+import { CellsList } from './components/CellsList';
+
+import { ResponseType } from './types/ResponseType';
+import { getData } from './utils/getData';
+
+import style from './App.module.scss';
+
+const App = () => {
+  const defaultMode: ResponseType = { name: '', field: 0, id: '' };
+  const [selectedMode, setSelectedMode] = useState<ResponseType>(defaultMode);
+  const [data, setData] = useState<ResponseType[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await getData();
+        setData(response);
+      } catch (error) {
+        console.log(`Something went wrong: ${error}`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (isLoading) {
+      fetchData();
+    }
+  }, [isLoading]);
 
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    isLoading ? <Loader /> : (
+      <div className={style.container}>
+        <h1 className={style.header}>StarNavi: Test Task</h1>
+        <Select
+          setSelectedMode={setSelectedMode}
+          data={data}
+        />
+        <StartButton />
+        <CellsList />
+        <Field selectedMode={selectedMode}></Field>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    )
+  );
 }
 
-export default App
+export default App;

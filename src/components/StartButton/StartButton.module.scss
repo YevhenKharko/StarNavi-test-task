@@ -1,0 +1,9 @@
+.button {
+  flex-basis: 20%;
+  background-color: #0ff;
+  height: 30px;
+  
+  &:hover {
+    cursor: pointer;
+  }
+}
