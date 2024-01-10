@@ -34,6 +34,10 @@ export const App = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    setHoveredCells([]);
+  }, [selectedMode]);
+
   const handleCellHoverChange = (cellIndex: number, isHovered: boolean) => {
     if (isHovered) {
       setHoveredCells((prevHoveredCells) => [...prevHoveredCells, cellIndex]);
@@ -51,17 +55,15 @@ export const App = () => {
       <h1 className={style.header}>StarNavi: Test Task</h1>
       <Select setSelectedMode={setSelectedMode} data={data} />
       <StartButton setIsStarted={setIsStarted} />
-
+      <CellsList
+        hoveredCells={hoveredCells}
+        selectedMode={selectedMode}
+      />
       {isStarted && selectedMode.id !== '' && (
-        <>
-          <CellsList
-            hoveredCells={hoveredCells}
-            selectedMode={selectedMode}/>
           <Field
             selectedMode={selectedMode}
             onCellHoverChange={handleCellHoverChange}
-          ></Field>
-        </>
+          />
       )}
     </div>
   );

@@ -2,11 +2,14 @@
   height: 300px;
   overflow: auto;
   flex-basis: 40%;
-  background-color: #0ff;
   text-align: center;
-  border: 1px solid #000;
+  // border: 1px solid #000;
 }
 
+.item {
+  background-color: #fe887b;
+  margin-block: 5px;
+}
 .item::before {
   content: '\261B';
   font-size: 25px;

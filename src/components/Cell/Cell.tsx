@@ -15,7 +15,6 @@ export const Cell: FC<CellType> = ({ cellIndex, onCellHoverChange }) => {
       className={`${style.cell} ${isHovered ? style.hovered : ''}`}
       onMouseEnter={handleHover}
     >
-      C
     </div>
   );
 };
