@@ -12,8 +12,7 @@ import { getData } from './utils/getData';
 import style from './App.module.scss';
 
 export const App = () => {
-  const defaultMode: ResponseType = { name: '', field: 0, id: '' };
-  const [selectedMode, setSelectedMode] = useState<ResponseType>(defaultMode);
+  const [selectedMode, setSelectedMode] = useState<ResponseType>({ name: '', field: 0, id: '' });
   const [isStarted, setIsStarted] = useState(false);
   const [data, setData] = useState<ResponseType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -53,17 +52,20 @@ export const App = () => {
   ) : (
     <div className={style.container}>
       <h1 className={style.header}>StarNavi: Test Task</h1>
-      <Select setSelectedMode={setSelectedMode} data={data} />
+      <Select
+        setSelectedMode={setSelectedMode}
+        data={data}
+      />
       <StartButton setIsStarted={setIsStarted} />
       <CellsList
         hoveredCells={hoveredCells}
         selectedMode={selectedMode}
       />
       {isStarted && selectedMode.id !== '' && (
-          <Field
-            selectedMode={selectedMode}
-            onCellHoverChange={handleCellHoverChange}
-          />
+        <Field
+          selectedMode={selectedMode}
+          onCellHoverChange={handleCellHoverChange}
+        />
       )}
     </div>
   );

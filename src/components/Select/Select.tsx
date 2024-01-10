@@ -1,8 +1,8 @@
+import { FC } from 'react';
 import { SelectType } from '../../types/SelectType';
 import style from './Select.module.scss';
 
-export const Select = (props: SelectType) => {
-  const { setSelectedMode, data } = props;
+export const Select: FC<SelectType> = ({ setSelectedMode, data }) => {
 
   const handleSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selectedName = e.target.value;
