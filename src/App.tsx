@@ -11,11 +11,13 @@ import { getData } from './utils/getData';
 
 import style from './App.module.scss';
 
-const App = () => {
+export const App = () => {
   const defaultMode: ResponseType = { name: '', field: 0, id: '' };
   const [selectedMode, setSelectedMode] = useState<ResponseType>(defaultMode);
+  const [isStarted, setIsStarted] = useState(false);
   const [data, setData] = useState<ResponseType[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [hoveredCells, setHoveredCells] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,25 +31,38 @@ const App = () => {
       }
     };
 
-    if (isLoading) {
-      fetchData();
+    fetchData();
+  }, []);
+
+  const handleCellHoverChange = (cellIndex: number, isHovered: boolean) => {
+    if (isHovered) {
+      setHoveredCells((prevHoveredCells) => [...prevHoveredCells, cellIndex]);
+    } else {
+      setHoveredCells((prevHoveredCells) =>
+        prevHoveredCells.filter((index) => index !== cellIndex)
+      );
     }
-  }, [isLoading]);
+  };
 
-  return (
-    isLoading ? <Loader /> : (
-      <div className={style.container}>
-        <h1 className={style.header}>StarNavi: Test Task</h1>
-        <Select
-          setSelectedMode={setSelectedMode}
-          data={data}
-        />
-        <StartButton />
-        <CellsList />
-        <Field selectedMode={selectedMode}></Field>
-      </div>
-    )
+  return isLoading ? (
+    <Loader />
+  ) : (
+    <div className={style.container}>
+      <h1 className={style.header}>StarNavi: Test Task</h1>
+      <Select setSelectedMode={setSelectedMode} data={data} />
+      <StartButton setIsStarted={setIsStarted} />
+
+      {isStarted && selectedMode.id !== '' && (
+        <>
+          <CellsList
+            hoveredCells={hoveredCells}
+            selectedMode={selectedMode}/>
+          <Field
+            selectedMode={selectedMode}
+            onCellHoverChange={handleCellHoverChange}
+          ></Field>
+        </>
+      )}
+    </div>
   );
-}
-
-export default App;
+};

@@ -1,3 +1,6 @@
+import { ResponseType } from './ResponseType';
+
 export interface FieldType {
-  selectedMode: object;
+  selectedMode: ResponseType;
+  onCellHoverChange: (cellIndex: number, isHovered: boolean) => void;
 }

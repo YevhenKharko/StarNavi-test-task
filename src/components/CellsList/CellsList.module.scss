@@ -1,7 +1,22 @@
 .container {
+  height: 300px;
+  overflow: auto;
   flex-basis: 40%;
+  background-color: #0ff;
+  text-align: center;
+  border: 1px solid #000;
+}
+
+.item::before {
+  content: '\261B';
+  font-size: 25px;
 }
 
 .list {
-  background-color: #0ff;
+  list-style-type: none;
+}
+
+.accent {
+  color: #fb0000;
+  font-weight: bold;
 }

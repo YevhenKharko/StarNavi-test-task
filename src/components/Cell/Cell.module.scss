@@ -1,3 +1,18 @@
 .cell {
-  background-color: red;
+  background-color: #fff;
+  border: 1px solid #000;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #0ff;
+  }
+
+}
+
+.hovered {
+  background-color: #0ff;
+}
+
+.white {
+  background-color: #fff;
 }
