@@ -23,13 +23,13 @@ export const Field: FC<FieldType> = ({ selectedMode, onCellHoverChange }) => {
     generateCells();
   }, [selectedMode, onCellHoverChange]);
 
-  const gridContainerStyle: CSSProperties = {
+  const containerStyle: CSSProperties = {
     gridTemplateColumns: `repeat(${selectedMode.field}, 1fr)`,
     gridTemplateRows: `repeat(${selectedMode.field}, 1fr)`,
   };
 
   return (
-    <div className={style.field} style={gridContainerStyle}>
+    <div className={style.field} style={containerStyle}>
       {cells}
     </div>
   );

@@ -3,9 +3,9 @@ import style from './CellsList.module.scss';
 import { CellsListType } from '../../types/CellsListType';
 
 export const CellsList: FC<CellsListType> = ({ hoveredCells, selectedMode }) => {
-
   return (
     <div className={style.container}>
+      <h2>Hovered squares:</h2>
       <ul className={style.list}>
         {hoveredCells.map(cell => {
            const column = ((cell - 1) % selectedMode.field) + 1;

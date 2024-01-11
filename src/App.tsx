@@ -57,15 +57,18 @@ export const App = () => {
         data={data}
       />
       <StartButton setIsStarted={setIsStarted} />
-      <CellsList
-        hoveredCells={hoveredCells}
-        selectedMode={selectedMode}
-      />
+
       {isStarted && selectedMode.id !== '' && (
-        <Field
-          selectedMode={selectedMode}
-          onCellHoverChange={handleCellHoverChange}
-        />
+        <>
+          <CellsList
+            hoveredCells={hoveredCells}
+            selectedMode={selectedMode}
+          />
+          <Field
+            selectedMode={selectedMode}
+            onCellHoverChange={handleCellHoverChange}
+          />
+        </>
       )}
     </div>
   );

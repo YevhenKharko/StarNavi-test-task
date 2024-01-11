@@ -1,13 +1,15 @@
 .container {
-  height: 300px;
+  position: absolute;
+  right: 0%;
+  top: 10%;
+  height: 80%;
+  width: 50%;
   overflow: auto;
-  flex-basis: 40%;
   text-align: center;
-  // border: 1px solid #000;
 }
 
 .item {
-  background-color: #fe887b;
+  background-color: #eccac6;
   margin-block: 5px;
 }
 .item::before {
