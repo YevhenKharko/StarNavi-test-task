@@ -56,7 +56,7 @@ export const App = () => {
         setSelectedMode={setSelectedMode}
         data={data}
       />
-      <StartButton setIsStarted={setIsStarted} />
+      <StartButton isStarted={isStarted} setIsStarted={setIsStarted} />
 
       {isStarted && selectedMode.id !== '' && (
         <>
